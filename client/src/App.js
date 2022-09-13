@@ -3,10 +3,12 @@ import { Home } from './pages/Home';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { Toaster } from "react-hot-toast";
+import { Header } from './components/Header';
 function App() {
   return (
     <div >
        <Toaster position="top-center" reverseOrder={false} />
+       <Header/>
        <Routes>
            <Route path='/'element={<Home/>}/>
            <Route path='/login'element={<Login/>}/>

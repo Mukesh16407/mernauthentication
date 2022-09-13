@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import './mix.css'
 
 export const Login = () => {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [passShow, setPassShow] = useState(false);
   const navigate = useNavigate();
 
   const loginUser =async()=>{
@@ -48,13 +48,20 @@ export const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
               value={email}
             />
-             <input
-              type="password"
+            <div>
+            <input
+              type={!passShow?"password":"text"}
               className="py-1 px-3 border-2 border-secondary focus:outline-none w-full"
               placeholder="password"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
             />
+           <div className='showpass' onClick={()=>setPassShow(!passShow)}>
+              {!passShow ? "Hide":"Show"}
+            </div>
+            </div>
+            
+            
             <button
               className="py-1 px-5 text-white bg-primary"
               onClick={loginUser}
