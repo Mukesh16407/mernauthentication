@@ -12,9 +12,25 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const loginUser =async()=>{
-
+    
+    if (email === "") {
+      toast.error("email is required!", {
+          position: "top-center"
+      });
+  } else if (!email.includes("@")) {
+      toast.error("includes @ in your email!", {
+          position: "top-center"
+      });
+  } else if (password === "") {
+      toast.error("password is required!", {
+          position: "top-center"
+      });
+  } else if (password.length < 6) {
+      toast.error("password must be 6 char!", {
+          position: "top-center"
+      });
+  } else{
     const userObj = {password,email,};
-
     try{
       toast.loading("Loading...");
       const response = await axios.post("/api/auth/login", userObj);
@@ -31,6 +47,10 @@ export const Login = () => {
       toast.dismiss();
       toast.error("Something went wrong");
     }
+
+  }
+
+    
   }
 
   return (

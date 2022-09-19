@@ -58,6 +58,7 @@ export const Register = () => {
         toast.dismiss();
         if(response.data.success){
           toast.success(response.data.message);
+          setUserRegistration({ ...userRegistration, fname: "", email: "", password: "", cPassword: "" });
         }else {
           toast.error(response.data.message);
         }
