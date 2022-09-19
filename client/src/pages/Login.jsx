@@ -77,7 +77,7 @@ export const Login = () => {
               value={password}
             />
            <div className='showpass' onClick={()=>setPassShow(!passShow)}>
-              {!passShow ? "Hide":"Show"}
+              {!passShow ? "Show":"Hide"}
             </div>
             </div>
             

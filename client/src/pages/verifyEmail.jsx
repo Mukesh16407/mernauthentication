@@ -5,7 +5,7 @@ import axios from 'axios';
 import {toast} from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
 
-export const verifyEmail = () => {
+export const VerifyEmail = () => {
 
   const [emailVerified, setEmailVerified] = useState("");
   

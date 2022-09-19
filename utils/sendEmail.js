@@ -1,12 +1,10 @@
 const nodemailer = require("nodemailer");
-const bcrypt = require("bcrypt");
-const Token = require("../model/tokenMode");
-
+const Token = require("../model/tokenMode")
 module.exports  = async (user, mailType) => {
   try {
     const transporter = nodemailer.createTransport({
       service: "gmail",
-      host: "smtp.gmail.com",
+      host: "smtp.mailtrap.io",
       port: 587,
       secure: true,
       auth: {
@@ -14,6 +12,8 @@ module.exports  = async (user, mailType) => {
         pass: process.env.PASSWORD,
       },
     });
+    
+    
     const encryptedToken = bcrypt
       .hashSync(user._id.toString(), 10)
       .replaceAll("/", "");
@@ -25,8 +25,8 @@ module.exports  = async (user, mailType) => {
 
     let emailContent, mailOptions;
 
-    if (mailType == "verifyemail") {
-      emailContent = `<div><h1>Please click on the below link to verify your email address</h1> <a href="http://localhost:3000/verifyemail/${encryptedToken}">${encryptedToken}</a>  </div>`;
+    if (mailType === "verifyemail") {
+      emailContent = `<div><h1>Please click on the below link to verify your email address</h1> <a href="http://localhost:3000/verifyemail/${encryptedToken}">${encryptedToken}</a>  </div> `;
 
       mailOptions = {
         from: process.env.EMAIL,

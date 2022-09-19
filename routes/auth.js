@@ -23,6 +23,7 @@ router.post('/register', async(req,res)=>{
         const newUser = new User(req.body);
         const result = await newUser.save();
         await sendEmail(result, "verifyemail");
+       
         
         res.status(200).send({
             success: true,
@@ -70,6 +71,20 @@ router.post('/login', async(req,res)=>{
         res.status(400).send(error);
     }
 });
-
+router.post("/verifyemail", async (req, res) => {
+    try {
+    
+      const tokenData = await Token.findOne({ token: req.body.token });
+      if (tokenData) {
+        await User.findOneAndUpdate({ _id: tokenData.userid, isVerifed: true });
+        await Token.findOneAndDelete({ token: req.body.token });
+        res.send({ success: true, message: "Email Verified Successlly" });
+      } else {
+        res.send({ success: false, message: "Invalid token" });
+      }
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  });
 
 module.exports = router;
